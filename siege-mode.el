@@ -5,7 +5,7 @@
 ;; Author: tslil clingman <tslil@posteo.de>
 ;; Version: 2.2
 ;; Package-Version: 20180710.1841
-;; Package-Requires: ((emacs "24.4"))
+;; Package-Requires: ((emacs "24.4") (cl-lib "1.0"))
 ;; URL: https://github.com/tslilc/siege-mode
 ;; Keywords: convenience region wrap
 
@@ -170,9 +170,9 @@ PREFIX-MATCH is assumed to match against OPEN-CHR. Returns the list\
               pos (match-end 0))
         (while (and (not end) (< pos (length string)))
           (setq curr (aref string pos))
-          (when (char-equal curr open-chr) (incf count))
-          (when (char-equal curr close-chr) (decf count))
-          (incf pos)
+          (when (char-equal curr open-chr) (cl-incf count))
+          (when (char-equal curr close-chr) (cl-decf count))
+          (cl-incf pos)
           (when (= count 0) (setq end pos)))))
     (when end (list pre beg end))))
 
