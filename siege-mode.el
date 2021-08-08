@@ -149,7 +149,8 @@ the input stream. See `siege-default-end-on-space'."
   (if siege--end-on-space (exit-minibuffer) (insert " ")))
 
 (defvar siege-minibuffer-map
-  (let ((map minibuffer-local-map))
+  (let ((map (make-sparse-keymap)))
+    (set-keymap-parent map minibuffer-local-map)
     (define-key map (kbd "SPC") 'siege--handle-space)
     (define-key map (kbd "C-c a") 'siege--toggle-derive)
     (define-key map (kbd "C-c s") 'siege--toggle-space)
